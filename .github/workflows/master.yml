@@ -27,9 +27,4 @@ jobs:
       run: |
         docker buildx create --use
         docker buildx inspect --bootstrap
-        docker buildx build --platform linux/amd64,linux/arm64 -t ${{ github.repository }}-mysql:latest .
-        docker tag ${{ github.repository }}-mysql:latest ghcr.io/${{ github.repository_owner }}/${{ github.repository }}-mysql:latest
-        docker push ghcr.io/${{ github.repository_owner }}/${{ github.repository }}-mysql:latest
-
-
-
+        docker buildx build --platform linux/amd64,linux/arm64 -t ghcr.io/${{ github.repository_owner }}/${{ github.repository }}-mysql:latest --push .
