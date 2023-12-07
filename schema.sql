@@ -15,8 +15,13 @@
 # Dump of table users
 # ------------------------------------------------------------
 
+CREATE DATABASE IF NOT EXISTS default_database;
+USE default_database;
+
 DROP TABLE IF EXISTS `users`;
 
+-- simulate some existing schema
+-- this is where schema will be kept and updated after every build
 CREATE TABLE `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `group_id` int(11) NOT NULL,
@@ -25,7 +30,13 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- for testing pusposes only
+CREATE DATABASE IF NOT EXISTS default_database_test;
 
+-- this is not safe for production, this is here for testing pusposes only
+CREATE USER IF NOT EXISTS 'username'@'%' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON *.* TO 'username'@'%';
+FLUSH PRIVILEGES;
 
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
